@@ -4,6 +4,8 @@ import com.xyinc.gps.dao.PoiDao
 import com.xyinc.gps.model.Poi
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import kotlin.math.abs
+import kotlin.math.pow
 
 @Service
 class PoiService {
@@ -16,29 +18,18 @@ class PoiService {
 
     fun createPoi(name: String, xCoordinate: Long, yCoordinate: Long): Poi? =
         if (poiDao.findById(name).isEmpty) {
-            val newPoi = Poi()
-            newPoi.name = name
-            newPoi.xCoordinates = xCoordinate
-            newPoi.yCoordinates = yCoordinate
-            val poiSaved = poiDao.save(newPoi)
-            poiSaved
+            poiDao.save(Poi(name = name, xCoordinates = xCoordinate, yCoordinates = yCoordinate))
         } else null
 
-    fun getPoiByCoordinatesAndMaxDistance(xCoordinate: Long, yCoordinate: Long, maxDistance: Long): List<Poi> {
-        val xCoordinateMaxDistance = xCoordinate + maxDistance
-        val xCoordinateMinDistance = xCoordinate - maxDistance
-        val yCoordinateMaxDistance = yCoordinate + maxDistance
-        val yCoordinateMinDistance = yCoordinate - maxDistance
-        return poiDao.findAll().filter { poi: Poi ->
-            isXRangeCoordinate(poi, xCoordinateMaxDistance, xCoordinateMinDistance) and
-                    isYRangeCoordinate(poi, yCoordinateMaxDistance, yCoordinateMinDistance)
+    fun getPoiByCoordinatesAndMaxDistance(xCoordinate: Long, yCoordinate: Long, maxDistance: Long): List<Poi> =
+        poiDao.findAll().filter { poi: Poi ->
+            isInsidePerimeterDistance(poi, xCoordinate, yCoordinate, maxDistance)
         }
-    }
 
-    fun isXRangeCoordinate(poi: Poi, xCoordinateMaxDistance: Long, xCoordinateMinDistance : Long) : Boolean =
-        poi.xCoordinates in xCoordinateMinDistance..xCoordinateMaxDistance
-
-    fun isYRangeCoordinate(poi: Poi, yCoordinateMaxDistance: Long, yCoordinateMinDistance : Long) : Boolean =
-        poi.yCoordinates in yCoordinateMinDistance..yCoordinateMaxDistance
+    private fun isInsidePerimeterDistance(poi: Poi, xCoordinateReference: Long, yCoordinateReference: Long, maxDistance: Long): Boolean =
+        (abs(poi.xCoordinates) - abs(xCoordinateReference)).toDouble().pow(2) +
+                ((abs(poi.yCoordinates) - abs(yCoordinateReference)).toDouble()).pow(2) <= maxDistance.toDouble().pow(2)
 
 }
+
+
