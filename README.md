@@ -30,18 +30,19 @@ Serviços associados a Ponto de Interesse (POI)
 ---
 
 ###### Inicializar a aplicacao (via Intellij):<br/>
-    Configuration > Application<br/>
-    Name: PoiApplicationKt <br/>
-    Main Class: com.xyinc.poi.PoiApplicationKt<br/>
-    Module: poi.main<br/>
+    Configuration > Application
+    Name: PoiApplicationKt
+    Main Class: com.xyinc.poi.PoiApplicationKt
+    Module: poi.main
     JRE: Java 11
 
 ---
 
 ###### Inicializar APP Local -  via SH
-    ./startup.sh <br/>
+    ./startup.sh
 OBS.:<br/>
-- conceder permissão de execução no script via comando: 'chmod +x startup.sh'
+- conceder permissão de execução no script via comando: 
+    `chmod +x startup.sh`
 ---
 
 #### Acessar APP Local (via Swagger)
