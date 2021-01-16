@@ -21,11 +21,3 @@ class PoiEntity (
     var yCoordinates: Long = 0
 
 ) : Serializable
-
-/*
-fun PoiEntity.toPoiResponse() = PoiResponse(
-    name = "$name",
-    xCoordinate = "$xCoordinates",
-    yCoordinate = "$yCoordinates"
-)
-*/

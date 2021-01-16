@@ -16,23 +16,27 @@ Serviços associados a Ponto de Interesse (POI)
 
 ## Onboarding
 
-#### Inicializar APP Local -  via SH
-
-
 #### Inicializar APP Local - manualmente
 
 Inicializar banco de dados local:<br/>
 docker-compose up -d
+
+Implantação de scripts de banco de dados local:<br/>
+./gradlew -Dflyway.configFiles=src/main/resources/flyway.conf flywayRepair flywayMigrate flywayInfo
 
 Inicializar a aplicacao (via linha de comando):<br/>
 ./gradlew bootRun -Dspring.profiles.active=local
 
 Inicializar a aplicacao (via Intellij):<br/>
 Configuration > Application<br/>
-Name: GpsApplicationKt <br/>
-Main Class: com.xyinc.poi.GpsApplicationKt<br/>
-Module: gps.main<br/>
+Name: PoiApplicationKt <br/>
+Main Class: com.xyinc.poi.PoiApplicationKt<br/>
+Module: poi.main<br/>
 JRE: Java 11
+
+#### Inicializar APP Local -  via SH
+./startup.sh <br/>
+OBS.: conceder permissão de execução no script via comando: 'chmod +x startup.sh'
 
 ---
 
@@ -46,13 +50,13 @@ http://localhost:8080/swagger-ui.html
 #### Exemplos de requisição via CURL
 
 ##### Consulta de POIs (exemplo)
-curl -X GET 'http://localhost:8080/pois'
+curl -i -X GET 'http://localhost:8080/pois' && echo
 
 ##### Cadastro de POI
-curl -d '{"name":"Academia", "xCoordinates":20, "yCoordinates":10}' -H "Content-Type: application/json" -X POST 'http://localhost:8080/pois'
+curl -i -d '{"name":"Academia", "xCoordinates":20, "yCoordinates":10}' -H "Content-Type: application/json" -X POST 'http://localhost:8080/pois' && echo
 
 ##### Consulta de POIs baseado em um ponto de referencia e distancia
-curl -X GET 'http://localhost:8080/pois/references?xCoordinateReference=20&yCoordinateReference=10&distance=10'
+curl -i -X GET 'http://localhost:8080/pois/references?xCoordinateReference=20&yCoordinateReference=10&distance=10' && echo
 
 ---
 
@@ -61,5 +65,10 @@ http://localhost:8080/actuator/health
 
 ---
 
-## TroubleShooting
+## Manuais de Instalaçaõ e  TroubleShooting
 
+Instalação Docker Compose <br/>
+https://docs.docker.com/compose/install/
+
+Configuração para rodar docker compose com usuário nao root <br/>
+https://docs.docker.com/engine/install/linux-postinstall/

@@ -37,12 +37,9 @@ dependencies {
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	implementation("io.springfox:springfox-boot-starter:3.0.0")
+	implementation("io.springfox:springfox-swagger2:2.9.2")
+	implementation("io.springfox:springfox-swagger-ui:2.9.2")
 	runtimeOnly("mysql:mysql-connector-java")
-
-	//implementation("io.springfox:springfox-swagger2:3.0.0")
-	//implementation("io.springfox:springfox-swagger-ui:3.0.0")
-
 }
 
 tasks.withType<KotlinCompile> {

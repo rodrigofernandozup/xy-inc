@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/pois")
@@ -19,15 +20,13 @@ class PoiController {
 
     @GetMapping
     @ApiOperation (httpMethod = "GET", value = "Busca todos POIs")
-    fun getPoi(): ResponseEntity<List<PoiEntity>> =
-        ResponseEntity.ok(poiService.getAllPoi())
+    fun getPois(): ResponseEntity<List<PoiEntity>> =
+        ResponseEntity.ok(poiService.getAllPois())
 
     @PostMapping
     @ApiOperation(httpMethod = "POST", value = "Cadastra POI")
     fun addPoi(@RequestBody poiEntity: PoiEntity): ResponseEntity<PoiEntity> =
-        poiService.createPoi(poiEntity)?.let {
-            ResponseEntity(it, HttpStatus.CREATED)
-        } ?: ResponseEntity.status(HttpStatus.CONFLICT).build()
+        ResponseEntity(poiService.createPoi(poiEntity), HttpStatus.CREATED)
 
     @GetMapping("/references")
     @ApiOperation (httpMethod = "GET", value = "Busca POIs por coordenadas (X e Y) e distancia")

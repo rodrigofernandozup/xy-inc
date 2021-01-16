@@ -1,6 +1,8 @@
 package com.xyinc.poi.service
 
 import com.xyinc.poi.entity.PoiEntity
+import com.xyinc.poi.exceptionhandler.exception.PoiAlreadyExistsException
+import com.xyinc.poi.exceptionhandler.exception.PoiNameIsBlankException
 import com.xyinc.poi.repository.PoiRepository
 import org.springframework.stereotype.Service
 import kotlin.math.abs
@@ -9,21 +11,24 @@ import kotlin.math.pow
 @Service
 class PoiService (private val poiRepository: PoiRepository) {
 
-    fun getAllPoi(): List<PoiEntity> =
+    fun getAllPois(): List<PoiEntity> =
         poiRepository.findAll().toList()
-        /*poiRepository.findAll().toList().map {poiEntity -> poiEntity.toPoiResponse() }*/
 
     fun createPoi(poiEntity: PoiEntity): PoiEntity? =
-        if (!poiRepository.findById(poiEntity.name).isPresent) {
+        if (validatePoi(poiEntity) && !poiRepository.findById(poiEntity.name).isPresent) {
             poiRepository.save(poiEntity)
-        } else null
+        } else throw PoiAlreadyExistsException()
 
     fun getPoiByCoordinatesAndMaxDistance(xCoordinate: Long, yCoordinate: Long, maxDistance: Long): List<PoiEntity> =
         poiRepository.findAll().filter { poiEntity: PoiEntity ->
             isInsidePerimeterDistance(poiEntity, xCoordinate, yCoordinate, maxDistance) }
-        /*poiRepository.findAll().filter { poiEntity: PoiEntity ->
-            isInsidePerimeterDistance(poiEntity, xCoordinate, yCoordinate, maxDistance)
-        }.map { poiEntity -> poiEntity.toPoiResponse() }*/
+
+    private fun validatePoi(poiEntity: PoiEntity) : Boolean {
+        if(poiEntity.name.isBlank()) {
+            throw PoiNameIsBlankException();
+        }
+        return true
+    }
 
     private fun isInsidePerimeterDistance(poiEntity: PoiEntity, xCoordinateReference: Long, yCoordinateReference: Long, maxDistance: Long): Boolean =
         (abs(poiEntity.xCoordinates) - abs(xCoordinateReference)).toDouble().pow(2) +
