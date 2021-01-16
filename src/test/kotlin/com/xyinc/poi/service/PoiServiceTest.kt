@@ -2,6 +2,7 @@ package com.xyinc.poi.service
 
 import com.xyinc.poi.domain.Poi
 import com.xyinc.poi.domain.toPoiEntity
+import com.xyinc.poi.entity.PoiEntity
 import com.xyinc.poi.exceptionhandler.exception.PoiAlreadyExistsException
 import com.xyinc.poi.exceptionhandler.exception.PoiInvalidCoordinateException
 import com.xyinc.poi.exceptionhandler.exception.PoiNameIsBlankException
@@ -10,6 +11,7 @@ import com.xyinc.poi.utils.PoiUtils
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.mockito.ArgumentMatchers
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
@@ -27,15 +29,14 @@ class PoiServiceTest {
     @InjectMocks
     private val poiService = PoiService(poiRepository)
 
-    /*@Test
+    @Test
     fun `should insert poi success test` () {
-        val poi = PoiUtils.init().getPoi().build()
-        val poiEntity = poi.toPoiEntity()
+        val poi = PoiUtils.init().poi().build()
         Mockito.`when`(poiRepository.findById(poi.name)).thenReturn(Optional.empty())
-        Mockito.`when`(poiRepository.save(poiEntity)).thenReturn(poiEntity)
+        Mockito.`when`(poiRepository.save(ArgumentMatchers.any(PoiEntity::class.java))).thenReturn(poi.toPoiEntity())
         val poiSaved = poiService.createPoi(poi)
         Assertions.assertEquals(poi, poiSaved)
-    }*/
+    }
 
     @Test
     fun `should fail insert poi by poi already exists test` () {

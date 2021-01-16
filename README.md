@@ -51,7 +51,7 @@ OBS.:<br/>
 #### Acessar APP Local (via Swagger)
  
 ##### URL Swagger (Local):
-[link](http://localhost:8080/swagger-ui.html){:target="_blank"}
+http://localhost:8080/swagger-ui.html
 
 ---
 
