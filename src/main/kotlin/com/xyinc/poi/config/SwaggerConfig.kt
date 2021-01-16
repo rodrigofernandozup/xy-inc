@@ -1,4 +1,4 @@
-package com.xyinc.gps.config
+package com.xyinc.poi.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -11,13 +11,14 @@ import springfox.documentation.spring.web.plugins.Docket
 import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 @Configuration
+@EnableSwagger2
 class SwaggerConfig {
 
     @Bean
     open fun api(): Docket = Docket(DocumentationType.SWAGGER_2)
         .apiInfo(apiInfo())
         .select()
-        .apis(RequestHandlerSelectors.basePackage("com.xyinc.gps"))
+        .apis(RequestHandlerSelectors.any())
         .paths(PathSelectors.any())
         .build();
 

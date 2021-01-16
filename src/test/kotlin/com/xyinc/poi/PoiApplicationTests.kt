@@ -1,10 +1,10 @@
-package com.xyinc.gps
+package com.xyinc.poi
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class GpsApplicationTests {
+class PoiApplicationTests {
 
 	@Test
 	fun contextLoads() {

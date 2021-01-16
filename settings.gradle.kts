@@ -1,1 +1,1 @@
-rootProject.name = "gps"
+rootProject.name = "poi"

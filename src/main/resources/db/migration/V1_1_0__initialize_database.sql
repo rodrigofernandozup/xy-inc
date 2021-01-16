@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS schema.poi;
+drop table IF EXISTS poi;
 
 create table poi
 (

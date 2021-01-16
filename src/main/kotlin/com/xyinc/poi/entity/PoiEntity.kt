@@ -1,7 +1,5 @@
-package com.xyinc.gps.model
+package com.xyinc.poi.entity
 
-import lombok.Builder
-import lombok.Data
 import java.io.Serializable
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -10,9 +8,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "poi")
-@Data
-@Builder
-class Poi (
+class PoiEntity (
 
     @Id
     @Column(name = "name", nullable = false, updatable = false)
@@ -23,4 +19,13 @@ class Poi (
 
     @Column(name = "y_coordinates", nullable = false)
     var yCoordinates: Long = 0
+
 ) : Serializable
+
+/*
+fun PoiEntity.toPoiResponse() = PoiResponse(
+    name = "$name",
+    xCoordinate = "$xCoordinates",
+    yCoordinate = "$yCoordinates"
+)
+*/
