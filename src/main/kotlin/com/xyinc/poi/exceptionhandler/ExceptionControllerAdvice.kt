@@ -1,6 +1,7 @@
 package com.xyinc.poi.exceptionhandler
 
 import com.xyinc.poi.exceptionhandler.exception.PoiAlreadyExistsException
+import com.xyinc.poi.exceptionhandler.exception.PoiInvalidCoordinateException
 import com.xyinc.poi.exceptionhandler.exception.PoiNameIsBlankException
 import com.xyinc.poi.exceptionhandler.messages.ExceptionMessageEnum
 import org.springframework.http.HttpStatus
@@ -21,5 +22,10 @@ class ExceptionControllerAdvice: ResponseEntityExceptionHandler() {
     @ExceptionHandler(value = [(PoiNameIsBlankException::class)])
     fun handlePoiNameIsBlank(ex: PoiNameIsBlankException, request: WebRequest): ResponseEntity<Error> {
         return ResponseEntity(Error(ExceptionMessageEnum.POI_NAME_IS_BLANK.message), HttpStatus.BAD_REQUEST)
+    }
+
+    @ExceptionHandler(value = [(PoiInvalidCoordinateException::class)])
+    fun handlePoiNameIsBlank(ex: PoiInvalidCoordinateException, request: WebRequest): ResponseEntity<Error> {
+        return ResponseEntity(Error(ExceptionMessageEnum.POI_INVALID_COORDINATE.message), HttpStatus.BAD_REQUEST)
     }
 }

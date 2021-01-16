@@ -10,7 +10,10 @@ Serviços associados a Ponto de Interesse (POI)
 - Gradle
 - Kotlin
 - MySQL
+  
+## Ferramentas 
 - Docker / Docker Compose
+- Flyway
 
 ---
 
@@ -21,7 +24,7 @@ Serviços associados a Ponto de Interesse (POI)
 ###### Inicializar banco de dados local:<br/>
     docker-compose up -d
 
-###### Implantação de scripts de banco de dados local:<br/>
+###### Implantação de scripts de banco de dados local (via Flyway):<br/>
     ./gradlew -Dflyway.configFiles=src/main/resources/flyway.conf flywayRepair flywayMigrate flywayInfo
 
 ###### Inicializar a aplicacao (via linha de comando):<br/>
@@ -48,7 +51,7 @@ OBS.:<br/>
 #### Acessar APP Local (via Swagger)
  
 ##### URL Swagger (Local):
-http://localhost:8080/swagger-ui.html
+[link](http://localhost:8080/swagger-ui.html){:target="_blank"}
 
 ---
 
@@ -57,10 +60,10 @@ http://localhost:8080/swagger-ui.html
 ###### Consulta de POIs (exemplo)
     curl -i -X GET 'http://localhost:8080/pois' && echo
 
-###### Cadastro de POI
-    curl -i -d '{"name":"Academia", "xCoordinates":20, "yCoordinates":10}' -H "Content-Type: application/json" -X POST 'http://localhost:8080/pois' && echo
+###### Cadastro de POI (exemplo)
+    curl -i -d '{"name":"Academia", "x":20, "y":10}' -H "Content-Type: application/json" -X POST 'http://localhost:8080/pois' && echo
 
-###### Consulta de POIs baseado em um ponto de referencia e distancia
+###### Consulta de POIs baseado em um ponto de referencia e distância (exemplo)
     curl -i -X GET 'http://localhost:8080/pois/references?xCoordinateReference=20&yCoordinateReference=10&distance=10' && echo
 
 ---

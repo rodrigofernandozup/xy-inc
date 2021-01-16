@@ -1,14 +1,16 @@
 package com.xyinc.poi.utils
 
+import com.xyinc.poi.controller.request.PoiRequest
+import com.xyinc.poi.domain.Poi
 import com.xyinc.poi.entity.PoiEntity
-import org.springframework.data.geo.Distance
 
 class PoiUtils {
 
-    private lateinit var poi : PoiEntity
+    private lateinit var poi : Poi
 
     companion object {
 
+        const val POI_NAME_DEFAULT = "Poi"
         const val COORDINATE_DEFAULT = 0L
 
         fun init(): PoiUtils =
@@ -16,24 +18,30 @@ class PoiUtils {
 
         private fun get(name: String, xCoordinate : Long, yCoordinate: Long): PoiUtils{
             val poiUtils = PoiUtils()
-            poiUtils.poi = PoiEntity(name, xCoordinate, yCoordinate)
+            poiUtils.poi = Poi(name, xCoordinate, yCoordinate)
             return poiUtils
         }
     }
 
-    fun getPoi() : PoiUtils =
-        PoiUtils.get("Poi", COORDINATE_DEFAULT, COORDINATE_DEFAULT)
+    fun poi() : PoiUtils =
+        PoiUtils.get(POI_NAME_DEFAULT, COORDINATE_DEFAULT, COORDINATE_DEFAULT)
 
-    fun getPoiWithBlankName() : PoiUtils =
+    fun poiWithBlankName() : PoiUtils =
         PoiUtils.get("", COORDINATE_DEFAULT, COORDINATE_DEFAULT)
 
-    fun getAnotherPoiInsidePerimeterOfDefaultPoi(poi: PoiEntity, distance: Long) : PoiUtils =
-        PoiUtils.get("Another Poi Inside Perimeter Distance", poi.xCoordinates + distance/2, poi.yCoordinates + distance/2)
+    fun poiInsidePerimeterOfDefaultPoi(poi: Poi, distance: Long) : PoiUtils =
+        PoiUtils.get("Another Poi Inside Perimeter Distance", poi.xCoordinate + distance/2, poi.yCoordinate + distance/2)
 
-    fun getAnotherPoiOutPerimeterOfDefaultPoi(poi: PoiEntity, distance: Long) : PoiUtils =
-        PoiUtils.get("Another Poi Out Perimeter Distance", poi.xCoordinates + distance, poi.yCoordinates + distance)
+    fun poiOutPerimeterOfDefaultPoi(poi: Poi, distance: Long) : PoiUtils =
+        PoiUtils.get("Another Poi Out Perimeter Distance", poi.xCoordinate + distance, poi.yCoordinate + distance)
 
-    fun build(): PoiEntity {
+    fun poiXCoordinateNegative() : PoiUtils =
+        PoiUtils.get(POI_NAME_DEFAULT, -1, COORDINATE_DEFAULT)
+
+    fun poiYCoordinateNegative() : PoiUtils =
+        PoiUtils.get(POI_NAME_DEFAULT, COORDINATE_DEFAULT, -1)
+
+    fun build(): Poi {
         return poi
     }
 }
