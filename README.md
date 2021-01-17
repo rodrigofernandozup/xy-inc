@@ -63,7 +63,7 @@ http://localhost:8080/swagger-ui.html
     curl -i -X GET 'http://localhost:8080/pois' && echo
 
 ###### Cadastro de POI (exemplo)
-    curl -i -d '{"name":"Academia", "x":20, "y":10}' -H "Content-Type: application/json" -X POST 'http://localhost:8080/pois' && echo
+    curl -i -d '{"name":"Academia", "x":100, "y":100}' -H "Content-Type: application/json" -X POST 'http://localhost:8080/pois' && echo
 
 ###### Consulta de POIs baseado em um ponto de referencia e distância (exemplo)
     curl -i -X GET 'http://localhost:8080/pois/references?xCoordinateReference=20&yCoordinateReference=10&distance=10' && echo
@@ -84,6 +84,14 @@ Dados para acesso (a app deve estar rodando):
     JDBC URL: jdbc:h2:./database/poidb
     Username: poi
     Password: poi
+
+---
+
+## Calculo àrea da circunferência - Racional
+
+![Calculo àrea da circunferência](docs/circunferencia.png?raw=true "Calculo àrea da circunferência")
+
+Referência: https://brasilescola.uol.com.br/matematica/circunferencia.htm
 
 ---
 
