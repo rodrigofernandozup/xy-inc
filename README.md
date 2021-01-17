@@ -17,7 +17,13 @@ Serviços associados a Ponto de Interesse (POI)
 
 ## Onboarding
 
-### Inicializar APP Local (automaticamente via ShellScript)
+### Checkout do projeto
+
+`git clone https://github.com/rodrigofernandozup/xy-inc`
+
+Acessar diretório do projeto e seguir processo de inicialização da API (automatizado ou manualmente)
+
+### Inicializar API local (automatizado via ShellScript)
     ./startup.sh
 OBS.:<br/>
 - conceder permissão de execução no script via comando:
@@ -25,7 +31,7 @@ OBS.:<br/>
 - este comando realiza o build da aplicação, executa as implantações dos scripts de banco de dados (criação da tabela e carga inicial de dados via Flyway) e inicializa a aplicação
 - a porta 8080 deve estar livre (para identificar se existe algum processo na porta :8080, pode ser usado o comando: `lsof -i :8080`) 
 
-#### Inicializar APP Local - manualmente (opção alternativa)
+#### Inicializar API local - manualmente (opção alternativa)
 
 ###### Build da aplicação:<br/>
     ./gradlew clean build
@@ -50,9 +56,9 @@ OBS.:<br/>
 
 ---
 
-#### Acessar APP Local (via Swagger)
+#### Acessar API local (via Swagger)
  
-##### URL Swagger (Local):
+##### URL Swagger (local):
 http://localhost:8080/swagger-ui.html
 
 ---
@@ -78,7 +84,7 @@ http://localhost:8080/actuator/health
 ## Interface Client para acesso ao Banco de dados (H2 Console)
 http://localhost:8080/h2-console
 
-Dados para acesso (a app deve estar rodando):
+Dados para acesso (a API deve estar rodando):
   
     Driver Class: org.h2.Driver 
     JDBC URL: jdbc:h2:./database/poidb

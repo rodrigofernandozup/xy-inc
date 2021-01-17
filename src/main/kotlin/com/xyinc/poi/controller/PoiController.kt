@@ -32,7 +32,7 @@ class PoiController {
 
     @GetMapping("/references")
     @ApiOperation (httpMethod = "GET", value = "Busca POIs por coordenadas (X e Y) e distancia")
-    fun getPoisByCoordinateAndRange(@RequestParam(required = false) xCoordinateReference: Long,
+    fun getPoisByCoordinateAndRange(@RequestParam xCoordinateReference: Long,
                                        @RequestParam yCoordinateReference: Long,
                                        @RequestParam distance: Long): ResponseEntity<List<PoiResponse>> =
         ResponseEntity.ok(poiService.getPoisByCoordinatesAndMaxDistance(xCoordinateReference, yCoordinateReference, distance).map { poi -> poi.toPoiResponse() })
