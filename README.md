@@ -4,25 +4,31 @@ XY Inc - POI - GPS
 Serviços associados a Ponto de Interesse (POI)
 
 ---
-## Stack
+## Stack / Dependências / Ferramentas 
 
-- Java 11
-- Gradle
-- Kotlin
-- MySQL
-  
-## Ferramentas 
-- Docker / Docker Compose
-- Flyway
+- Java 11 (https://www.oracle.com/br/java/technologies/javase-jdk11-downloads.html)
+- Gradle (https://docs.gradle.org/current/userguide/building_java_projects.html)
+- Kotlin (https://kotlinlang.org/docs/kotlin-pdf.html)
+- H2 (https://www.h2database.com/html/main.html e https://www.baeldung.com/spring-boot-h2-database)
+- Flyway (https://flywaydb.org/)
+- Swagger (https://swagger.io/)
 
 ---
 
 ## Onboarding
 
-#### Inicializar APP Local - manualmente
+### Inicializar APP Local (automaticamente via ShellScript)
+    ./startup.sh
+OBS.:<br/>
+- conceder permissão de execução no script via comando:
+  `chmod +x startup.sh`
+- este comando realiza o build da aplicação, executa as implantações dos scripts de banco de dados (criação da tabela e carga inicial de dados) e inicializa a aplicação
+- a porta 8080 deve estar livre (para identificar se existe algum processo na porta :8080, pode ser usado o comando: `lsof -i :8080`) 
 
-###### Inicializar banco de dados local:<br/>
-    docker-compose up -d
+#### Inicializar APP Local - manualmente (opção alternativa)
+
+###### Build da aplicação:<br/>
+    ./gradlew clean build
 
 ###### Implantação de scripts de banco de dados local (via Flyway):<br/>
     ./gradlew -Dflyway.configFiles=src/main/resources/flyway.conf flywayRepair flywayMigrate flywayInfo
@@ -32,20 +38,16 @@ Serviços associados a Ponto de Interesse (POI)
 
 ---
 
-###### Inicializar a aplicacao (via Intellij):<br/>
+###### Inicializar a aplicação (via Intellij):<br/>
     Configuration > Application
     Name: PoiApplicationKt
     Main Class: com.xyinc.poi.PoiApplicationKt
     Module: poi.main
     JRE: Java 11
 
----
-
-###### Inicializar APP Local -  via SH
-    ./startup.sh
 OBS.:<br/>
-- conceder permissão de execução no script via comando: 
-    `chmod +x startup.sh`
+- o processo de implantação de scripts via flyway deve ser previamente executado
+
 ---
 
 #### Acessar APP Local (via Swagger)
@@ -70,6 +72,18 @@ http://localhost:8080/swagger-ui.html
 
 ## HealthCheck API (String Actuator)
 http://localhost:8080/actuator/health
+
+---
+
+## Interface Client para acesso ao Banco de dados (H2 Console)
+http://localhost:8080/h2-console
+
+Dados para acesso:
+  
+    Driver Class: org.h2.Driver 
+    JDBC URL: jdbc:h2:./database/poidb
+    Username: poi
+    Password: poi
 
 ---
 

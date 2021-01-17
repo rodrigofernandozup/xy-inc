@@ -23,7 +23,7 @@ class PoiService (private val poiRepository: PoiRepository) {
             poiRepository.save(poi.toPoiEntity()).toPoi()
         } else throw PoiAlreadyExistsException()
 
-    fun getPoiByCoordinatesAndMaxDistance(xCoordinate: Long, yCoordinate: Long, maxDistance: Long): List<Poi> =
+    fun getPoisByCoordinatesAndMaxDistance(xCoordinate: Long, yCoordinate: Long, maxDistance: Long): List<Poi> =
         poiRepository.findAll().filter { poiEntity: PoiEntity ->
             isInsidePerimeterDistance(poiEntity, xCoordinate, yCoordinate, maxDistance) }.toList().map { poiEntity -> poiEntity.toPoi() }
 

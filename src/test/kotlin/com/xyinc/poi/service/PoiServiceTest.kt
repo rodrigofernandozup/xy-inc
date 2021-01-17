@@ -90,7 +90,7 @@ class PoiServiceTest {
             anotherPoiOutPerimeterOfDefaultPoi
             )
         Mockito.`when`(poiRepository.findAll()).thenReturn(pois.map { poi -> poi.toPoiEntity() })
-        val poisReturned = poiService.getPoiByCoordinatesAndMaxDistance(PoiUtils.COORDINATE_DEFAULT, PoiUtils.COORDINATE_DEFAULT, DISTANCE)
+        val poisReturned = poiService.getPoisByCoordinatesAndMaxDistance(PoiUtils.COORDINATE_DEFAULT, PoiUtils.COORDINATE_DEFAULT, DISTANCE)
         Assertions.assertTrue(poiDefault in poisReturned)
         Assertions.assertTrue(anotherPoiInsidePerimeterOfDefaultPoi in poisReturned)
         Assertions.assertTrue(anotherPoiOutPerimeterOfDefaultPoi !in poisReturned)

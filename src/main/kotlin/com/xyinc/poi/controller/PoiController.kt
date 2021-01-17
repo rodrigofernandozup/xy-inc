@@ -4,7 +4,6 @@ import com.xyinc.poi.controller.request.PoiRequest
 import com.xyinc.poi.controller.request.toPoi
 import com.xyinc.poi.controller.response.PoiResponse
 import com.xyinc.poi.domain.toPoiResponse
-import com.xyinc.poi.entity.PoiEntity
 import com.xyinc.poi.service.PoiService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import javax.validation.Valid
 
 @RestController
 @RequestMapping("/pois")
@@ -34,9 +32,9 @@ class PoiController {
 
     @GetMapping("/references")
     @ApiOperation (httpMethod = "GET", value = "Busca POIs por coordenadas (X e Y) e distancia")
-    fun findAllPoiByCoordinateAndRange(@RequestParam xCoordinateReference: Long,
+    fun getPoisByCoordinateAndRange(@RequestParam(required = false) xCoordinateReference: Long,
                                        @RequestParam yCoordinateReference: Long,
                                        @RequestParam distance: Long): ResponseEntity<List<PoiResponse>> =
-        ResponseEntity.ok(poiService.getPoiByCoordinatesAndMaxDistance(xCoordinateReference, yCoordinateReference, distance).map { poi -> poi.toPoiResponse() })
+        ResponseEntity.ok(poiService.getPoisByCoordinatesAndMaxDistance(xCoordinateReference, yCoordinateReference, distance).map { poi -> poi.toPoiResponse() })
 
 }
