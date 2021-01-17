@@ -93,7 +93,7 @@ Dados para acesso (a app deve estar rodando):
 
 O ponto "O(a,b)" representa as coordenadas de referência a partir de onde se deseja consultar os POIs; o raio "r" representa a distância máxima até onde se deseja que os POIs retornados estejam posicionados; e o ponto "P(x,y)" representa as coordenadas máximas do perímetro de consulta de POIS a partir do ponto de referência - O(a,b) - e o raio - r - especificados  
 
-Referência: https://brasilescola.uol.com.br/matematica/circunferencia.htm
+Referência: https://brasilescola.uol.com.br/matematica/circunferencia.htm [Acessado em 13/01/2021]
 
 ---
 
