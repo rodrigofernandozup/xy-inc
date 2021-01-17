@@ -22,7 +22,7 @@ Serviços associados a Ponto de Interesse (POI)
 OBS.:<br/>
 - conceder permissão de execução no script via comando:
   `chmod +x startup.sh`
-- este comando realiza o build da aplicação, executa as implantações dos scripts de banco de dados (criação da tabela e carga inicial de dados) e inicializa a aplicação
+- este comando realiza o build da aplicação, executa as implantações dos scripts de banco de dados (criação da tabela e carga inicial de dados via Flyway) e inicializa a aplicação
 - a porta 8080 deve estar livre (para identificar se existe algum processo na porta :8080, pode ser usado o comando: `lsof -i :8080`) 
 
 #### Inicializar APP Local - manualmente (opção alternativa)
@@ -78,7 +78,7 @@ http://localhost:8080/actuator/health
 ## Interface Client para acesso ao Banco de dados (H2 Console)
 http://localhost:8080/h2-console
 
-Dados para acesso:
+Dados para acesso (a app deve estar rodando):
   
     Driver Class: org.h2.Driver 
     JDBC URL: jdbc:h2:./database/poidb
